@@ -66,27 +66,27 @@ commands:
     exec:
       component: maven
       commandLine: 'MAVEN_OPTS="-Xmx200m" && mvn -Duser.home=${HOME} -DskipTests clean install'
-      workingDir: '${CHE_PROJECTS_ROOT}/spring-petclinic'
+      workingDir: '${PROJECTS_ROOT}/spring-petclinic'
   - id: 02compileandrun
     exec:
       component: maven
       commandLine: 'MAVEN_OPTS="-Xmx200m" && mvn -Duser.home=${HOME} spring-boot:run'
-      workingDir: '${CHE_PROJECTS_ROOT}/spring-petclinic'
+      workingDir: '${PROJECTS_ROOT}/spring-petclinic'
   - id: 03runindebugmode
     exec:
-      workingDir: '${CHE_PROJECTS_ROOT}/spring-petclinic'
+      workingDir: '${PROJECTS_ROOT}/spring-petclinic'
       commandLine: |-
           mvn  -Duser.home=${HOME} spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug
            -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
       component: maven
   - id: 04runtests
     exec:
-      workingDir: '${CHE_PROJECTS_ROOT}/spring-petclinic'
+      workingDir: '${PROJECTS_ROOT}/spring-petclinic'
       commandLine: 'MAVEN_OPTS="-Xmx200m" && mvn -Duser.home=${HOME} verify'
       component: maven
   - id: 05logintodeploymentcluster
     exec:
-      workingDir: '${CHE_PROJECTS_ROOT}/spring-petclinic'
+      workingDir: '${PROJECTS_ROOT}/spring-petclinic'
       commandLine: |
           echo
           echo "Before you can deploy this application to an openshift cluster,"
@@ -95,6 +95,6 @@ commands:
       component: maven
   - id: 06deploytoopenshift
     exec:
-      workingDir: '${CHE_PROJECTS_ROOT}/spring-petclinic'
+      workingDir: '${PROJECTS_ROOT}/spring-petclinic'
       commandLine: 'mvn fabric8:deploy -Popenshift -DskipTests'
       component: maven
