@@ -5,7 +5,7 @@ projects:
   - name: spring-petclinic
     git:
       remotes:
-        origin: 'https://github.com/paulczar/spring-petclinic.git'
+        origin: 'https://github.com/datianshi/spring-petclinic.git'
       checkoutFrom:
         revision: main
 
@@ -26,8 +26,8 @@ components:
           name: JAVA_OPTS
         - value: $(JAVA_OPTS)
           name: MAVEN_OPTS
-        - value: 'mysql'
-          name: SPRING_PROFILES_ACTIVE
+        # - value: 'mysql'
+        #   name: SPRING_PROFILES_ACTIVE
         - value: 'jdbc:mysql://mysql-workspace:3306/petclinic'
           name: MYSQL_URL
   - name: m2
@@ -96,5 +96,5 @@ commands:
   - id: 06deploytoopenshift
     exec:
       workingDir: '${PROJECTS_ROOT}/spring-petclinic'
-      commandLine: 'mvn fabric8:deploy -Popenshift -DskipTests'
+      commandLine: 'mvn oc:resource oc:deploy'
       component: maven
